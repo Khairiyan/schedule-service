@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: schedule
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/recondition
+    username: postgres
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        default_schema: schedule
+
+server:
+  port: 9090
