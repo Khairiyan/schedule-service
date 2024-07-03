@@ -3,7 +3,7 @@ spring:
     name: schedule
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/recondition
+    url: jdbc:postgresql://localhost:5432/schedule
     username: postgres
     password: root
   jpa:
