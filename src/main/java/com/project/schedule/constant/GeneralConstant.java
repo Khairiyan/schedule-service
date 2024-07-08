@@ -19,6 +19,7 @@ public interface GeneralConstant {
         public static final String DATA_NOT_FOUND_IN_SEARCH = "Data with maskapai %s not found";
         public static final String ILLEGAL_INPUT_PAYLOAD  = "%s must be text";
         public static final String ILLEGAL_INPUT_SAME_DATA = "%s and %s must be unique";
+        public static final String ILLEGAL_INPUT_FOR_UPDATE = "%s and %s should not same with another data";
     }
 
 }
