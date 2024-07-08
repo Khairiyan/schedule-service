@@ -19,7 +19,7 @@ public class Pesawat {
 
     private String maskapai;
 
-    @Column
+    @Column(name = "tipe_pesawat")
     private String tipePesawat;
 
     @OneToOne(mappedBy = "pesawat", cascade = CascadeType.ALL)
