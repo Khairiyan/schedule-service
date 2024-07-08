@@ -27,11 +27,12 @@ public class PesawatController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<ApiResponse<PesawatPostResponse>> createPlane(@RequestBody PesawatPostRequest request){
-        PesawatPostResponse response = pesawatService.createPesawat(request);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(ApiResponse.<PesawatPostResponse>builder().status(HttpStatus.OK).metadata(null).message(GeneralConstant.GeneralMessageSuccessApi.SUCCESS_CREATE_DATA).data(response).build());
+    public ResponseEntity<ApiResponse<PesawatPostResponse>> createPlane(@RequestBody PesawatPostRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.<PesawatPostResponse>builder()
+                        .status(HttpStatus.OK)
+                        .metadata(null)
+                        .message(GeneralConstant.GeneralMessageSuccessApi.SUCCESS_CREATE_DATA)
+                        .data(pesawatService.createPesawat(request)).build());
     }
 
     @GetMapping(
@@ -39,10 +40,11 @@ public class PesawatController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<ListApiResponse<PesawatDto, Metadata>> getListPlanes(@RequestParam(defaultValue = "1") int page,
-                                                                     @RequestParam(defaultValue = "10") int size){
+                                                                               @RequestParam(defaultValue = "10") int size,
+                                                                               @RequestParam(defaultValue = "") String search){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(pesawatService.getListPesawat(page -1, size));
+                .body(pesawatService.getListPesawat(page -1, size, search));
     }
 
     @GetMapping(
@@ -67,6 +69,17 @@ public class PesawatController {
                         .status(HttpStatus.OK)
                         .metadata(null)
                         .message(GeneralConstant.GeneralMessageSuccessApi.SUCCESS_UPDATE_DATA).build());
+    }
+
+    @DeleteMapping(
+            value = "/plane/{planeId}"
+    )
+    public ResponseEntity<ApiResponse<String>> deletePlane(@PathVariable(value = "planeId") String pesawatId){
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.<String>builder()
+                .status(HttpStatus.OK)
+                .message(pesawatService.delete(pesawatId))
+                .data(null)
+                .metadata(null).build());
     }
 
 

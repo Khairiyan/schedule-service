@@ -17,7 +17,7 @@ public class Keberangkatan {
     private UUID uuid;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "pesawatId", referencedColumnName = "uuid")
+    @JoinColumn(name = "pesawatId", referencedColumnName = "id")
     private Pesawat pesawat;
 
     private String tanggal;

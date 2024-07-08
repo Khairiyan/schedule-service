@@ -8,13 +8,16 @@ import com.project.schedule.dto.response.Metadata;
 import com.project.schedule.dto.response.PesawatPostResponse;
 
 
+
 public interface PesawatService {
 
     public PesawatPostResponse createPesawat(PesawatPostRequest request);
 
-    public ListApiResponse<PesawatDto, Metadata> getListPesawat(int pageNumber, int pageSize);
+    public ListApiResponse<PesawatDto, Metadata> getListPesawat(int pageNumber, int pageSize, String search);
 
     public PesawatDto getPesawat(String pesawatId);
 
     public PesawatDto updatePesawat(String pesawatId, PesawatUpdateRequest request);
+
+    public String delete(String pesawatId);
 }

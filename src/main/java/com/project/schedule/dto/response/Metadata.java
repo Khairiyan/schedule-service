@@ -17,8 +17,11 @@ public class Metadata {
 
     private String totalData;
 
-    public void setPageMessage(int page, int totalPages){
+    public void setPageMessage(int page, int totalPages, String search){
         if(page > totalPages){
+            if(!search.isEmpty()){
+                throw new DataNotFoundException(String.format(GeneralConstant.ErrorMessageApi.DATA_NOT_FOUND_IN_SEARCH, search));
+            }
             throw new DataNotFoundException(String.format(GeneralConstant.ErrorMessageApi.DATA_NOT_FOUND_IN_PAGE, page));
         }
         this.page = String.format("%d of %d", page, totalPages);
