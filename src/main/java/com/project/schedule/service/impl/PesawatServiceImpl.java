@@ -40,10 +40,12 @@ public class PesawatServiceImpl implements PesawatService {
     @Override
     @Transactional
     public PesawatPostResponse createPesawat(PesawatPostRequest request){
-        Pesawat pesawatCheckExisting = pesawatRepository
-                .findAll(PesawatSpecification.hasMaskapaiName(request.getMaskapai())).stream().findFirst()
-                .orElse(null);
-//        assert pesawatCheckExisting.isPresent();
+        boolean pesawatCheckExisting = pesawatRepository
+                .exists(
+                        PesawatSpecification
+                                .hasMaskapaiName(request.getMaskapai())
+                                .and(PesawatSpecification.hasTipePesawat(request.getTipePesawat()))
+                );
         payloadValidation.validatePostRequest(request, pesawatCheckExisting);
 
         Pesawat pesawat = new Pesawat();
@@ -93,6 +95,7 @@ public class PesawatServiceImpl implements PesawatService {
     public PesawatDto updatePesawat(String pesawatId, PesawatUpdateRequest request) {
         Pesawat pesawat = pesawatRepository.findOne(getByUUID(UUID.fromString(pesawatId)))
                 .orElseThrow(() -> new DataNotFoundException(String.format(GeneralConstant.ErrorMessageApi.DATA_NOT_FOUND, pesawatId)));
+        payloadValidation.validatePatchRequest(pesawat, request);
         Pesawat afterMapper = pesawatListMapper.mapperUpdatePesawat(pesawat, request);
         pesawatRepository.save(afterMapper);
         return pesawatListMapper.mapperPesawat(afterMapper);
