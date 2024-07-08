@@ -23,4 +23,8 @@ public class PesawatSpecification {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("maskapai"), maskapai);
     }
 
+    public static Specification<Pesawat> hasTipePesawat(String tipePesawat){
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("tipePesawat"), tipePesawat);
+    }
+
 }
