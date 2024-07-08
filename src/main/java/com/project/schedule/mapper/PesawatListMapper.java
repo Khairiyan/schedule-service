@@ -20,7 +20,7 @@ public class PesawatListMapper {
             PesawatDto response = new PesawatDto();
             response.setId(pesawat.getUuid().toString());
             response.setMaskapai(pesawat.getMaskapai());
-            response.setTipePesawat(pesawat.getTipe_pesawat());
+            response.setTipePesawat(pesawat.getTipePesawat());
             responseList.add(response);
         }
         return responseList;
@@ -29,14 +29,14 @@ public class PesawatListMapper {
     public PesawatDto mapperPesawat(Pesawat pesawat){
         return PesawatDto.builder()
                 .id(pesawat.getUuid().toString())
-                .tipePesawat(pesawat.getTipe_pesawat())
+                .tipePesawat(pesawat.getTipePesawat())
                 .maskapai(pesawat.getMaskapai())
                 .build();
     }
 
     public Pesawat mapperUpdatePesawat(Pesawat pesawat, PesawatUpdateRequest request){
         if(request.getTipePesawat() != null){
-            pesawat.setTipe_pesawat(request.getTipePesawat());
+            pesawat.setTipePesawat(request.getTipePesawat());
         }
         if(request.getMaskapai() != null){
             pesawat.setMaskapai(request.getMaskapai());
