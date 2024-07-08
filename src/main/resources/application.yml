@@ -10,6 +10,8 @@ spring:
     properties:
       hibernate:
         default_schema: schedule
+    hibernate:
+      ddl-auto: update
 
 server:
   port: 9090
