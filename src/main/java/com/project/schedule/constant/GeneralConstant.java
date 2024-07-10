@@ -20,6 +20,18 @@ public interface GeneralConstant {
         public static final String ILLEGAL_INPUT_PAYLOAD  = "%s must be text";
         public static final String ILLEGAL_INPUT_SAME_DATA = "%s and %s must be unique";
         public static final String ILLEGAL_INPUT_FOR_UPDATE = "%s and %s should not same with another data";
+        public static final String ILLEGAL_INPUT_SAME_DATE_IN_SCHEDULE = "%s, %s, and %s must be unique";
+    }
+
+    class ConstantVariable{
+        private ConstantVariable(){}
+        public static final String TIPE_PESAWAT = "tipePesawat";
+        public static final String MASKAPAI = "maskapai";
+    }
+
+    class MessageFromService{
+        private MessageFromService(){}
+        public static final String SAVED_ES = "saved";
     }
 
 }
