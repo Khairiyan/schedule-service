@@ -26,8 +26,8 @@ public class HandlerExceptionController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse.<String[]>builder().error(messages).build());
     }
 
-//    @ExceptionHandler(RuntimeException.class)
-//    public ResponseEntity<ErrorResponse<List<String>>> handleDataNotFoundException(RuntimeException exception){
+//    @ExceptionHandler(ElasticsearchException.class)
+//    public ResponseEntity<ErrorResponse<List<String>>> handleDataNotFoundException(ElasticsearchException exception){
 //        log.info("Error Exception : {}", exception.getLocalizedMessage());
 //        List<String> messages = Arrays.asList(exception.getMessage().split("@"));
 //        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse.<List<String>>builder().error(messages).build());
