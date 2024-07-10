@@ -22,7 +22,4 @@ public class Pesawat {
     @Column(name = "tipe_pesawat")
     private String tipePesawat;
 
-    @OneToOne(mappedBy = "pesawat", cascade = CascadeType.ALL)
-    private Keberangkatan keberangkatan;
-
 }
