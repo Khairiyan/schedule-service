@@ -1,6 +1,5 @@
 package com.project.schedule.validation;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.schedule.constant.GeneralConstant;
 import com.project.schedule.dto.request.PesawatPostRequest;
 import com.project.schedule.dto.request.PesawatUpdateRequest;
@@ -19,22 +18,23 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class PayloadValidation {
 
-    private final ObjectMapper objectMapper;
-
     private final PesawatRepository pesawatRepository;
 
-        public void validatePostRequest(PesawatPostRequest request, boolean existingPesawat) {
+        public void validatePostRequestPlane(PesawatPostRequest request, boolean existingPesawat) {
             List<String> errors =  new ArrayList<>();
             Pattern patternNumbers = Pattern.compile("^\\d+$");
             if(!existingPesawat){
                 if (patternNumbers.matcher(request.getMaskapai()).matches()){
-                    errors.add(String.format(GeneralConstant.ErrorMessageApi.ILLEGAL_INPUT_PAYLOAD, "maskapai"));
+                    errors.add(String.format(GeneralConstant.ErrorMessageApi.ILLEGAL_INPUT_PAYLOAD, GeneralConstant.ConstantVariable.MASKAPAI));
                 }
                 if (patternNumbers.matcher(request.getTipePesawat()).matches()){
-                    errors.add(String.format(GeneralConstant.ErrorMessageApi.ILLEGAL_INPUT_PAYLOAD, "tipePesawat"));
+                    errors.add(String.format(GeneralConstant.ErrorMessageApi.ILLEGAL_INPUT_PAYLOAD, GeneralConstant.ConstantVariable.TIPE_PESAWAT));
                 }
             } else {
-                errors.add(String.format(GeneralConstant.ErrorMessageApi.ILLEGAL_INPUT_SAME_DATA, "maskapai", "tipePesawat"));
+                errors.add(String
+                        .format(GeneralConstant.ErrorMessageApi.ILLEGAL_INPUT_SAME_DATA,
+                                GeneralConstant.ConstantVariable.MASKAPAI,
+                                GeneralConstant.ConstantVariable.TIPE_PESAWAT));
             }
             if (errors.size() > 1){
                 throw new IllegalPayloadException(errors.getFirst() + "%" + errors.getLast());
@@ -44,7 +44,7 @@ public class PayloadValidation {
             }
         }
 
-        public void validatePatchRequest(Pesawat pesawat, PesawatUpdateRequest request){
+        public void validatePatchRequestPlane(Pesawat pesawat, PesawatUpdateRequest request){
             boolean checkBoolean = false;
             if(request.getTipePesawat() != null && request.getMaskapai() != null){
                 checkBoolean = pesawatRepository
@@ -70,7 +70,18 @@ public class PayloadValidation {
             }
 
             if(checkBoolean){
-                throw new IllegalPayloadException(String.format(GeneralConstant.ErrorMessageApi.ILLEGAL_INPUT_FOR_UPDATE, "maskapai", "tipePesawat"));
+                throw new IllegalPayloadException(String.format(
+                        GeneralConstant.ErrorMessageApi.ILLEGAL_INPUT_FOR_UPDATE,
+                        GeneralConstant.ConstantVariable.MASKAPAI,
+                        GeneralConstant.ConstantVariable.TIPE_PESAWAT));
+            }
+        }
+
+        public void validatePostRequestSchedule(boolean checkExistingData){
+            if(checkExistingData){
+                throw new IllegalPayloadException(
+                        String.format(GeneralConstant.ErrorMessageApi.ILLEGAL_INPUT_SAME_DATE_IN_SCHEDULE, "tanggal", "jadwalKeberangkatan", "asal")
+                );
             }
         }
 
