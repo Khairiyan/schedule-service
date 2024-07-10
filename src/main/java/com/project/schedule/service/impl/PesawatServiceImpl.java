@@ -46,7 +46,7 @@ public class PesawatServiceImpl implements PesawatService {
                                 .hasMaskapaiName(request.getMaskapai())
                                 .and(PesawatSpecification.hasTipePesawat(request.getTipePesawat()))
                 );
-        payloadValidation.validatePostRequest(request, pesawatCheckExisting);
+        payloadValidation.validatePostRequestPlane(request, pesawatCheckExisting);
 
         Pesawat pesawat = new Pesawat();
         UUID uuid = UUID.randomUUID();
@@ -95,7 +95,7 @@ public class PesawatServiceImpl implements PesawatService {
     public PesawatDto updatePesawat(String pesawatId, PesawatUpdateRequest request) {
         Pesawat pesawat = pesawatRepository.findOne(getByUUID(UUID.fromString(pesawatId)))
                 .orElseThrow(() -> new DataNotFoundException(String.format(GeneralConstant.ErrorMessageApi.DATA_NOT_FOUND, pesawatId)));
-        payloadValidation.validatePatchRequest(pesawat, request);
+        payloadValidation.validatePatchRequestPlane(pesawat, request);
         Pesawat afterMapper = pesawatListMapper.mapperUpdatePesawat(pesawat, request);
         pesawatRepository.save(afterMapper);
         return pesawatListMapper.mapperPesawat(afterMapper);
