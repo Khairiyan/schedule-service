@@ -3,7 +3,7 @@ spring:
     name: schedule
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/schedule
+    url: jdbc:postgresql://localhost:5432/recondition
     username: postgres
     password: root
   jpa:
@@ -12,6 +12,15 @@ spring:
         default_schema: schedule
     hibernate:
       ddl-auto: update
+
+  elasticsearch:
+    rest:
+      urisOne: 172.21.0.2:9200
+      urisTwo: 172.21.0.2:9300
+      username: elastic
+      password: changeme
+      connection-timeout: 1000
+      socket-timeout: 30000
 
 server:
   port: 9090
